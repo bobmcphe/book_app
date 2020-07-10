@@ -52,24 +52,24 @@ function handleSearch (req,res) {
             obj.body.items.forEach(book =>{
                 let bookObj = new Book(book);
                 bookObjArr.push(bookObj);
-                console.log(bookObj);
+                //console.log(book.volumeInfo.industryIdentifiers);
             })
-        response.status(200).json(bookObjArr);
+        res.status(200).json(bookObjArr);
         console.log(`book object array line 56: ${bookObjArr}`);
         })
         .catch(error => {
             console.log(`error with Bookhandler: ${error}`)
-            response.status(500).send(error);
+            res.status(500).send(error);
         });
 }
 
 
 function Book(obj) {
     this.description= obj.volumeInfo.description;
-    // this.author= obj.volumeInfo.authors;
+    this.author= obj.volumeInfo.authors || 'None';
     this.title = obj.volumeInfo.title;
-    // this.isbn = obj.industryIdentifiers[0].identifier;
-    // this.thumbnail = obj.imageLinks.thumbnail;
+    this.isbn = obj.volumeInfo.industryIdentifiers.identifier || 'Error: no ISBN';
+    this.thumbnail = obj.volumeInfo.imageLinks.thumbnail || 'https://cdn.thinglink.me/api/image/451931418868580353/1240/10/scaletowidth';
   }
 
 function registerForm (req,res) {
