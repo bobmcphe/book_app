@@ -47,7 +47,7 @@ function handleSearch (req,res) {
     const API = `https://www.googleapis.com/books/v1/volumes?q=intitle:${title}+inauthor:${author}&key=AIzaSyD0kg3D3tRoFiFU7V5h8BWaHlEPY1oGyUU`
     console.log(`API call: ${API}`)
     superagent.get(API)
-        .then(obj =>{
+        .then(obj =>{ //obj is the response. .body is inside the envelope (obj)
             console.log(`object.items line 50: ${obj.body.items}`);
             obj.body.items.forEach(book =>{
                 let bookObj = new Book(book);
@@ -55,17 +55,17 @@ function handleSearch (req,res) {
                 //console.log(book.volumeInfo.industryIdentifiers);
             })
         res.status(200).json(bookObjArr);
-        console.log(`book object array line 56: ${bookObjArr}`);
+        // console.log(`book object array line 56: ${bookObjArr}`);
         })
         .catch(error => {
-            console.log(`error with Bookhandler: ${error}`)
+            // console.log(`error with Bookhandler: ${error}`)
             res.status(500).send(error);
         });
 }
 
 
 function Book(obj) {
-    this.description= obj.volumeInfo.description;
+    this.book_description= obj.volumeInfo.description;
     this.author= obj.volumeInfo.authors || 'None';
     this.title = obj.volumeInfo.title;
     this.isbn = obj.volumeInfo.industryIdentifiers.identifier || 'Error: no ISBN';
