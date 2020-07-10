@@ -25,13 +25,13 @@ app.use(express.static('./public'));
 // ----------------------------------------------
 
 app.get('/', (req, res) => {
-    // Go to google and find stuff
-    // Save thing in the database
-    // Do other work
-    // Send out something
     res.status(200).send('This server is working');
   });
 app.get('/hello', helloHandler);
+app.get('/form-with-get', handleSearch)
+app.get('/searches/new', registerForm);
+
+
 app.use('*', handleNotFound);
 app.use(handleError);
 
@@ -39,7 +39,16 @@ app.use(handleError);
 // ROUTE HANDLER FUNCTIONS
 // ----------------------------------------------
 
-// handles any route that wasn't defined and gives a good messsage
+function registerForm (req,res) {
+    res.render('pages/searches/new');
+}
+
+function handleSearch(req,res){
+    console.log(req.query);
+    res.send(`Form with GET ... ${req.query.title}`)
+    //res.render('pages/searches/new', { formdata: req.query });
+}
+
 
 function helloHandler(req, res){
     //RENDER THE INDEX.EJS FILE
