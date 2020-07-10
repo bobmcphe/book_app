@@ -31,10 +31,8 @@ app.get('/', (req, res) => {
     // Send out something
     res.status(200).send('This server is working');
   });
-
+app.get('/hello', helloHandler);
 app.use('*', handleNotFound);
-
-
 app.use(handleError);
 
 // ----------------------------------------------
@@ -42,15 +40,22 @@ app.use(handleError);
 // ----------------------------------------------
 
 // handles any route that wasn't defined and gives a good messsage
+
+function helloHandler(req, res){
+    //RENDER THE INDEX.EJS FILE
+    res.render('pages/index');
+
+}
+
 function handleNotFound(req, res) {
     res.status(404).send('Could Not Find What You Asked For');
-  }
+}
   
   // 500 (catastrophic) error handler. Log it, and then tell the user
-  function handleError(error, req, res, next) {
-    console.error(error);
-    res.status(500).send('Something Bad Happened')
-  }
+function handleError(error, req, res, next) {
+console.error(error);
+res.status(500).send('Something Bad Happened')
+}
 
 
   app.listen(process.env.PORT, () => console.log(`Server is running on ${process.env.PORT}`));
