@@ -7,3 +7,22 @@ header {
     text-align: center;
 }
 
+h1 {
+    color: white;
+}
+
+.bookCard {
+    background-color: #D8D8D8;
+}
+
+#searchResultsBar {
+    background-color: #4A4A4A;
+}
+
+#searchBar {
+    background-color: #4A4A4A;
+}
+
+#searchButton {
+    background-color: black;
+}
