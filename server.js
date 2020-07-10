@@ -79,7 +79,7 @@ function registerForm (req,res) {
 // function handleSearch(req,res){
 //     console.log(req.query);
 //     res.send(`Form with GET ... ${req.query.title}`)
-//     //res.render('pages/searches/new', { formdata: req.query });
+//     //res.render('pages/searches/new', { formdata: req.query }); added this to save
 // }
 
 
