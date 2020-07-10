@@ -1,16 +1,24 @@
 body {
     background: #9B9B9B;
+    margin: 0px;
 }
 
-header {
+html {
+    padding: 0px;
+    margin: 0px;
+}
+
+header, footer {
     background-color: black;
     text-align: center;
     margin: 0;
     padding: 0;
+    line-height: 55px;
 }
 
 h1 {
     color: white;
+    padding-top: 15px;
 }
 
 .bookCard {
@@ -19,6 +27,8 @@ h1 {
 
 #searchResultsBar {
     background-color: #4A4A4A;
+    color: white;
+    line-height: 32px;
 }
 
 #searchBar {
@@ -28,3 +38,16 @@ h1 {
 #searchButton {
     background-color: black;
 }
+
+footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    color: white;
+   }
+
+   header{
+    position: absolute;
+    top: 0;
+    width: 100%;
+   }
