@@ -29,7 +29,7 @@ app.get('/', (req, res) => {
     res.status(200).send('This server is working');
   });
 app.get('/hello', helloHandler);
-app.get('/form-with-get', handleSearch)
+// app.get('/form-with-get', handleSearch)
 app.get('/searches/new', registerForm);
 app.post('/searches', postSearchThing);
 
@@ -41,28 +41,28 @@ app.use(handleError);
 // ROUTE HANDLER FUNCTIONS
 // ----------------------------------------------
 
-function handleSearch (req,res) {
-    let bookObjArr = [];
-    let title = req.query.title;
-    let author = req.query.author;
-    const API = `https://www.googleapis.com/books/v1/volumes?q=intitle:${title}+inauthor:${author}&key=AIzaSyD0kg3D3tRoFiFU7V5h8BWaHlEPY1oGyUU`
-    console.log(`API call: ${API}`)
-    superagent.get(API)
-        .then(obj =>{ //obj is the response. .body is inside the envelope (obj)
-            console.log(`object.items line 50: ${obj.body.items}`);
-            obj.body.items.forEach(book =>{
-                let bookObj = new Book(book);
-                bookObjArr.push(bookObj);
-                //console.log(book.volumeInfo.industryIdentifiers);
-            })
-        res.status(200).json(bookObjArr);
-        // console.log(`book object array line 56: ${bookObjArr}`);
-        })
-        .catch(error => {
-            // console.log(`error with Bookhandler: ${error}`)
-            res.status(500).send(error);
-        });
-}
+// function handleSearch (req,res) {
+//     let bookObjArr = [];
+//     let title = req.query.title;
+//     let author = req.query.author;
+//     const API = `https://www.googleapis.com/books/v1/volumes?q=intitle:${title}+inauthor:${author}&key=AIzaSyD0kg3D3tRoFiFU7V5h8BWaHlEPY1oGyUU`
+//     console.log(`API call: ${API}`)
+//     superagent.get(API)
+//         .then(obj =>{ //obj is the response. .body is inside the envelope (obj)
+//             console.log(`object.items line 50: ${obj.body.items}`);
+//             obj.body.items.forEach(book =>{
+//                 let bookObj = new Book(book);
+//                 bookObjArr.push(bookObj);
+//                 //console.log(book.volumeInfo.industryIdentifiers);
+//             })
+//         res.status(200).json(bookObjArr);
+//         // console.log(`book object array line 56: ${bookObjArr}`);
+//         })
+//         .catch(error => {
+//             // console.log(`error with Bookhandler: ${error}`)
+//             res.status(500).send(error);
+//         });
+// }
 
 function postSearchThing (req, res) {
 let bookObjArr = [];
@@ -77,12 +77,13 @@ superagent.post(API)
             let bookObj = new Book(book);
             bookObjArr.push(bookObj);
             //console.log(book.volumeInfo.industryIdentifiers);
-        })
-    res.status(200).json(bookObjArr);
+        });
+    // res.status(200).json(bookObjArr);
+    res.render('pages/searches/show', {books: bookObjArr});
     // console.log(`book object array line 56: ${bookObjArr}`);
     })
     .catch(error => {
-        // console.log(`error with Bookhandler: ${error}`)
+        console.log(`error with Bookhandler: ${error}`)
         res.status(500).send(error);
     });
 }
@@ -92,7 +93,7 @@ function Book(obj) {
     this.book_description= obj.volumeInfo.description;
     this.author= obj.volumeInfo.authors || 'None';
     this.title = obj.volumeInfo.title;
-    this.isbn = obj.volumeInfo.industryIdentifiers.identifier || 'Error: no ISBN';
+    // this.isbn = obj.volumeInfo.industryIdentifiers.identifier || 'Error: no ISBN';
     this.thumbnail = obj.volumeInfo.imageLinks.thumbnail || 'https://i.imgur.com/J5LVHEL.jpg';
   }
 
