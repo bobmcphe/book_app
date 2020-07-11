@@ -31,6 +31,7 @@ app.get('/', (req, res) => {
 app.get('/hello', helloHandler);
 app.get('/form-with-get', handleSearch)
 app.get('/searches/new', registerForm);
+app.post('/searches', postSearchThing);
 
 
 app.use('*', handleNotFound);
@@ -63,13 +64,36 @@ function handleSearch (req,res) {
         });
 }
 
+function postSearchThing (req, res) {
+let bookObjArr = [];
+let title = req.body.title; //does body go here? It was already body below...but I thought 'get' doesn't use it?
+let author = req.body.author;
+const API = `https://www.googleapis.com/books/v1/volumes?q=intitle:${title}+inauthor:${author}&key=AIzaSyD0kg3D3tRoFiFU7V5h8BWaHlEPY1oGyUU`
+console.log(`API call: ${API}`)
+superagent.post(API)
+    .then(obj =>{ //obj is the response. .body is inside the envelope (obj)
+        console.log(`object.items line 50: ${obj.body.items}`);
+        obj.body.items.forEach(book =>{
+            let bookObj = new Book(book);
+            bookObjArr.push(bookObj);
+            //console.log(book.volumeInfo.industryIdentifiers);
+        })
+    res.status(200).json(bookObjArr);
+    // console.log(`book object array line 56: ${bookObjArr}`);
+    })
+    .catch(error => {
+        // console.log(`error with Bookhandler: ${error}`)
+        res.status(500).send(error);
+    });
+}
+
 
 function Book(obj) {
     this.book_description= obj.volumeInfo.description;
     this.author= obj.volumeInfo.authors || 'None';
     this.title = obj.volumeInfo.title;
     this.isbn = obj.volumeInfo.industryIdentifiers.identifier || 'Error: no ISBN';
-    this.thumbnail = obj.volumeInfo.imageLinks.thumbnail || 'https://cdn.thinglink.me/api/image/451931418868580353/1240/10/scaletowidth';
+    this.thumbnail = obj.volumeInfo.imageLinks.thumbnail || 'https://i.imgur.com/J5LVHEL.jpg';
   }
 
 function registerForm (req,res) {
