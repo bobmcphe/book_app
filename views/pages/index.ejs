@@ -3,10 +3,56 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Bookshelf App</title>
     <link rel="stylesheet" href="/styles/base.css">
+    <!-- Load an icon library to show a hamburger menu (bars) on small screens -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body>
-    <h1>HELLO WORLD</h1>
+    <header>
+        <section>
+            <h2>Best Books!</h2>
+            <!-- "Hamburger menu" / "Bar icon" to toggle the navigation links -->
+            <a href="javascript:void(0);" class="icon" onclick="myFunction()">
+                <i class="fa fa-bars"></i>
+            </a>
+            </div>
+        </section>
+
+        <div id="searchResultsBar">Search Results</div>
+
+        <!-- Top Navigation Menu -->
+<div class="topnav">
+
+    <!-- Navigation links (hidden by default) -->
+    <div id="myLinks">
+    <a href="#seach">Search</a>
+    <a href="#saved">Saved</a>
+    <a href="#about">About</a>
+    </div>
+</div>
+    </header>
+
+<!-----------------MAIN--------------------->
+
+<main>
+    <section id="book-template">
+        <h2></h2>
+        <img src="" alt="" title="">
+        
+        <h3></h3>
+    </section>
+    <section id="target"></section>
+</main>
+
+
+<!-----------------FOOTER--------------------->
+    <footer>
+        <script src="public/js/app.js"></script>
+        <div class="greyBall"></div>
+        <div class="greyBall"></div>
+        <div class="greyBall"></div>
+        <div class="greyBall"></div>
+    </footer>
 </body>
 </html>
