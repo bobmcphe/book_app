@@ -90,16 +90,16 @@ superagent.get(API)
 }
 
 //result = binaryCondition ? valueReturnedIfTrue : valueReturnedIfFalse;
+//below uses short circuits and ternary operators
 function Book(obj) {
     this.title = (obj.volumeInfo.title) ? obj.volumeInfo.title : 'no title';
-    // this.title = (typeof(obj.volumeInfo.title) !=='undefined' ? obj.volumeInfo.title)
-   // this.book_description= obj.volumeInfo.description;
-    // this.author= obj.volumeInfo.authors || 'None';
-    // this.title = obj.volumeInfo.title;
-    // this.isbn = obj.volumeInfo.industryIdentifiers.identifier || 'Error: no ISBN';
-    this.isbn = (typeof(obj.volumeInfo.industryIdentifiers) !=='undefined' ? obj.volumeInfo.industryIdentifiers.identifier : 'no isbn');
-    // this.thumbnail = obj.volumeInfo.imageLinks.thumbnail || 'https://i.imgur.com/J5LVHEL.jpg';
-  }
+    this.book_description = (obj.volumeInfo.description) ? obj.volumeInfo.description : 'no description';
+    this.author = (obj.volumeInfo.authors) ? obj.volumeInfo.authors : 'None';
+    this.title = (obj.volumeInfo.title) ? obj.volumeInfo.title : 'No title';
+    this.isbn = (obj.volumeInfo.industryIdentifiers) ? obj.volumeInfo.industryIdentifiers.identifier : 'Error: no ISBN';
+    //this.isbn = (typeof(obj.volumeInfo.industryIdentifiers) !=='undefined' ? obj.volumeInfo.industryIdentifiers.identifier : 'no isbn');
+    this.thumbnail = (obj.volumeInfo.imageLinks) ? obj.volumeInfo.imageLinks.thumbnail : 'https://i.imgur.com/J5LVHEL.jpg';
+}
 
 function registerForm (req,res) {
     res.render('pages/searches/new');
