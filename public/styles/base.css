@@ -1,6 +1,8 @@
 body {
     background: #9B9B9B;
-    margin: 0px;
+    max-width: 100%;
+    margin: 0 auto;
+    
 }
 
 .card{
@@ -13,6 +15,7 @@ body {
   padding: 25px; /*yep, proof it's treating as one object*/
   border-radius: 5px 5px 10px 10px;
   box-shadow: 0 0 10px 5px  #888888;
+  display: flex;
 }
 
 /* will probably need to remove */
@@ -22,6 +25,7 @@ body {
 
 ul li {
   list-style: none;
+  flex-direction: column;
   /* font-weight: 800; */
 }
 
