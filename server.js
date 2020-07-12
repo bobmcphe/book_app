@@ -76,7 +76,7 @@ superagent.get(API)
         obj.body.items.forEach(book =>{
             let bookObj = new Book(book);
             bookObjArr.push(bookObj);
-            //console.log(book.volumeInfo.industryIdentifiers);
+            console.log(book.volumeInfo.industryIdentifiers);
         });
     console.log(bookObjArr);
     // res.status(200).json(bookObjArr);
@@ -89,12 +89,15 @@ superagent.get(API)
     });
 }
 
-
+//result = binaryCondition ? valueReturnedIfTrue : valueReturnedIfFalse;
 function Book(obj) {
-    this.book_description= obj.volumeInfo.description;
+    this.title = (obj.volumeInfo.title) ? obj.volumeInfo.title : 'no title';
+    // this.title = (typeof(obj.volumeInfo.title) !=='undefined' ? obj.volumeInfo.title)
+   // this.book_description= obj.volumeInfo.description;
     // this.author= obj.volumeInfo.authors || 'None';
-    this.title = obj.volumeInfo.title;
+    // this.title = obj.volumeInfo.title;
     // this.isbn = obj.volumeInfo.industryIdentifiers.identifier || 'Error: no ISBN';
+    this.isbn = (typeof(obj.volumeInfo.industryIdentifiers) !=='undefined' ? obj.volumeInfo.industryIdentifiers.identifier : 'no isbn');
     // this.thumbnail = obj.volumeInfo.imageLinks.thumbnail || 'https://i.imgur.com/J5LVHEL.jpg';
   }
 
