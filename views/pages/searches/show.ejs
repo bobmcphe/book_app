@@ -4,18 +4,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="/styles/base.css">
 </head>
 <body>
+    <!--TODO I think we have something wrong with our JS, which is causing it to not create separate cards-->
     <h1>THIS IS SHOW.EJS</h1>
-    <ul>
-        <%  for (var book of books) {%>
-        <li><%= book.book_description  %> </li>
-        <li><%= book.author  %> </li>
-        <li><%= book.title  %> </li>
-        <li><%= book.isbn  %> </li>
-        <li><img src="<%= book.thumbnail  %>"> </li> 
-
-        <% } %>
-    </ul>
+    <div class="card">
+        <ul>
+            <%  for (var book of books) {%>
+            <li><img src="<%= book.thumbnail  %>"> </li> 
+            <li class="capTitle"><%= book.title  %> </li>
+            <li class="nameClass"><%= book.author  %> </li>
+            <li class="descripClass"><%= book.book_description  %> </li>
+            <li class="lastOne"><%= book.isbn  %> </li> <!--TODO Our isbn's are not showing up-->
+            <% } %>
+        </ul>
+    </div>
 </body>
 </html>

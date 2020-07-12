@@ -3,6 +3,47 @@ body {
     margin: 0px;
 }
 
+.card{
+  border: solid 1px black;
+  width: 500px;
+  margin: 0 auto;
+  font-size: 22px;
+  text-align: center;
+  background-color: #D8D8D8;
+  padding: 25px; /*yep, proof it's treating as one object*/
+  border-radius: 5px 5px 10px 10px;
+  box-shadow: 0 0 10px 5px  #888888;
+}
+
+/* will probably need to remove */
+.lastOne {
+  padding-bottom: 50px;
+}
+
+ul li {
+  list-style: none;
+  /* font-weight: 800; */
+}
+
+
+.capTitle {
+  font-weight: 500;
+  color: #f5f5f5;
+  text-shadow: 2px 2px #808080;
+
+}
+
+.nameClass {
+  font-style: italic;
+  padding: 5px;
+  margin-bottom: 18px;
+}
+
+.descripClass {
+  background-color: #EEEEEE;
+  padding: 12px;
+}
+
 html {
     padding: 0px;
     margin: 0px;
@@ -44,13 +85,13 @@ footer {
     bottom: 0;
     width: 100%;
     color: white;
-   }
+  }
 
-   header{
+  header{
     position: absolute;
     top: 0;
     width: 100%;
-   }
+  }
 
    .icon {
        float: right;
