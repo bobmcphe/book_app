@@ -25,10 +25,10 @@ app.use(express.static('./public'));
 // Route Definitions
 // ----------------------------------------------
 
-app.get('/', (req, res) => {
-    res.status(200).send('This server is working');
-  });
-app.get('/hello', helloHandler);
+// app.get('/', (req, res) => {
+//     res.status(200).send('This server is working');
+//   });
+app.get('/', helloHandler);
 // app.get('/form-with-get', handleSearch)
 app.get('/searches/new', registerForm);
 app.post('/searches', postSearchThing);
