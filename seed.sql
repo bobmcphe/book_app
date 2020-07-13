@@ -1,0 +1,1 @@
+INSERT INTO bookdb (id, author, title, book_description, isbn) VALUES (1, 'Orson', 'Ender\'s Game', 'this is description', 69420) RETURNING *;

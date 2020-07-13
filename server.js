@@ -32,6 +32,7 @@ app.get('/', helloHandler);
 // app.get('/form-with-get', handleSearch)
 app.get('/searches/new', registerForm);
 app.post('/searches', postSearchThing);
+// app.get('/books/:id', singleBookHandler);
 
 
 app.use('*', handleNotFound);
@@ -96,7 +97,8 @@ function Book(obj) {
     this.book_description = (obj.volumeInfo.description) ? obj.volumeInfo.description : 'no description';
     this.author = (obj.volumeInfo.authors) ? obj.volumeInfo.authors : 'None';
     this.title = (obj.volumeInfo.title) ? obj.volumeInfo.title : 'No title';
-    this.isbn = (obj.volumeInfo.industryIdentifiers) ? obj.volumeInfo.industryIdentifiers.identifier : 'Error: no ISBN';
+    this.isbn = (obj.volumeInfo.industryIdentifiers) ? obj.volumeInfo.industryIdentifiers[0].identifier : 'Error: no ISBN';
+
     //this.isbn = (typeof(obj.volumeInfo.industryIdentifiers) !=='undefined' ? obj.volumeInfo.industryIdentifiers.identifier : 'no isbn');
     this.thumbnail = (obj.volumeInfo.imageLinks) ? obj.volumeInfo.imageLinks.thumbnail : 'https://i.imgur.com/J5LVHEL.jpg';
 }
@@ -111,6 +113,31 @@ function registerForm (req,res) {
 //     //res.render('pages/searches/new', { formdata: req.query }); added this to save
 // }
 
+function addBook(req, res) {
+    console.log(req.body);
+    let SQL = 'INSERT INTO bookdb (id, author, title, book_description, isbn) VALUES ($1, $2, $3, $4, $5) RETURNING *;';
+
+    let param = [req.body.id, req.body.author, req.body.title, req.body.book_description, req.body.isbn];
+
+    client.query(SQL, param)
+    .then( () => {
+        res.redirect('/')
+    });
+
+}
+
+function retrieveBooks(req, res) {
+    //create query
+    const SQL = 'SELECT * from bookdb';
+
+    //give our SQL query to our pg 'agent'
+    client.query(SQL)
+        .then (results => {
+            //do we just need to return this?
+            response.status(200).json(results);
+        })
+        .catch(error => {response.status(500).send(error)});    
+}
 
 function helloHandler(req, res){
     //RENDER THE INDEX.EJS FILE
