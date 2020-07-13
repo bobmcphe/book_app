@@ -77,7 +77,7 @@ superagent.get(API)
         obj.body.items.forEach(book =>{
             let bookObj = new Book(book);
             bookObjArr.push(bookObj);
-            //console.log(book.volumeInfo.industryIdentifiers);
+            console.log(book.volumeInfo.industryIdentifiers);
         });
     console.log(bookObjArr);
     // res.status(200).json(bookObjArr);
@@ -90,13 +90,15 @@ superagent.get(API)
     });
 }
 
-
+//result = binaryCondition ? valueReturnedIfTrue : valueReturnedIfFalse;
+//below uses short circuits and ternary operators
 function Book(obj) {
     this.title = (obj.volumeInfo.title) ? obj.volumeInfo.title : 'no title';
     this.book_description = (obj.volumeInfo.description) ? obj.volumeInfo.description : 'no description';
     this.author = (obj.volumeInfo.authors) ? obj.volumeInfo.authors : 'None';
     this.title = (obj.volumeInfo.title) ? obj.volumeInfo.title : 'No title';
     this.isbn = (obj.volumeInfo.industryIdentifiers) ? obj.volumeInfo.industryIdentifiers[0].identifier : 'Error: no ISBN';
+
     //this.isbn = (typeof(obj.volumeInfo.industryIdentifiers) !=='undefined' ? obj.volumeInfo.industryIdentifiers.identifier : 'no isbn');
     this.thumbnail = (obj.volumeInfo.imageLinks) ? obj.volumeInfo.imageLinks.thumbnail : 'https://i.imgur.com/J5LVHEL.jpg';
 }
@@ -124,6 +126,18 @@ function addBook(req, res) {
 
 }
 
+function retrieveBooks(req, res) {
+    //create query
+    const SQL = 'SELECT * from bookdb';
+
+    //give our SQL query to our pg 'agent'
+    client.query(SQL)
+        .then (results => {
+            //do we just need to return this?
+            response.status(200).json(results);
+        })
+        .catch(error => {response.status(500).send(error)});    
+}
 
 function helloHandler(req, res){
     //RENDER THE INDEX.EJS FILE
