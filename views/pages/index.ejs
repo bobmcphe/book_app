@@ -39,7 +39,18 @@
     <section id="book-template">
         <h2></h2>
         <img src="" alt="" title="">
-        
+        <div id ="test-render-section">
+
+        <%  for (var book of books) { %>
+            <li><%= book.book_description  %> </li>
+            <li><%= book.author  %> </li>
+            <li><%= book.title  %> </li>
+            <li><%= book.isbn  %> </li>
+            <li><img src = "<%= book.thumbnail  %>"> </li>
+    
+        <% } %>
+
+        </div>
         <h3></h3>
     </section>
     <section id="target"></section>
