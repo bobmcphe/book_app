@@ -25,10 +25,10 @@ app.use(express.static('./public'));
 // Route Definitions
 // ----------------------------------------------
 
-app.get('/', (req, res) => {
-    res.status(200).send('This server is working');
-  });
-app.get('/hello', helloHandler);
+// app.get('/', (req, res) => {
+//     res.status(200).send('This server is working');
+//   });
+app.get('/', helloHandler);
 // app.get('/form-with-get', handleSearch)
 app.get('/searches/new', registerForm);
 app.post('/searches', postSearchThing);
@@ -76,7 +76,7 @@ superagent.get(API)
         obj.body.items.forEach(book =>{
             let bookObj = new Book(book);
             bookObjArr.push(bookObj);
-            //console.log(book.volumeInfo.industryIdentifiers);
+            console.log(book.volumeInfo.industryIdentifiers);
         });
     console.log(bookObjArr);
     // res.status(200).json(bookObjArr);
@@ -89,14 +89,17 @@ superagent.get(API)
     });
 }
 
-
+//result = binaryCondition ? valueReturnedIfTrue : valueReturnedIfFalse;
+//below uses short circuits and ternary operators
 function Book(obj) {
-    this.book_description= obj.volumeInfo.description;
-    // this.author= obj.volumeInfo.authors || 'None';
-    this.title = obj.volumeInfo.title;
-    // this.isbn = obj.volumeInfo.industryIdentifiers.identifier || 'Error: no ISBN';
-    // this.thumbnail = obj.volumeInfo.imageLinks.thumbnail || 'https://i.imgur.com/J5LVHEL.jpg';
-  }
+    this.title = (obj.volumeInfo.title) ? obj.volumeInfo.title : 'no title';
+    this.book_description = (obj.volumeInfo.description) ? obj.volumeInfo.description : 'no description';
+    this.author = (obj.volumeInfo.authors) ? obj.volumeInfo.authors : 'None';
+    this.title = (obj.volumeInfo.title) ? obj.volumeInfo.title : 'No title';
+    this.isbn = (obj.volumeInfo.industryIdentifiers) ? obj.volumeInfo.industryIdentifiers.identifier : 'Error: no ISBN';
+    //this.isbn = (typeof(obj.volumeInfo.industryIdentifiers) !=='undefined' ? obj.volumeInfo.industryIdentifiers.identifier : 'no isbn');
+    this.thumbnail = (obj.volumeInfo.imageLinks) ? obj.volumeInfo.imageLinks.thumbnail : 'https://i.imgur.com/J5LVHEL.jpg';
+}
 
 function registerForm (req,res) {
     res.render('pages/searches/new');

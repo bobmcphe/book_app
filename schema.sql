@@ -6,5 +6,6 @@ CREATE TABLE bookdb(
     author VARCHAR (255),
     title VARCHAR (255),
     book_description VARCHAR (255), 
-    isbn VARCHAR (255)
+    isbn VARCHAR (255),
+    bookshelf VARCHAR(255)
 );
