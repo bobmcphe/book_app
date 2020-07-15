@@ -7,7 +7,14 @@
       <link rel="stylesheet" href="/styles/base.css">
   </head>
   <body>
-      <form method="post" action="/searches"> 
+    <header>
+      <!-- <%- include('../../layout/header') %> -->
+      
+    </header>
+      <div id="pinkify"><h1>
+        Search For a Book Either By Title or Author
+      </h1 ></div>
+      <form method="post" action="/searches" id="searchForm"> 
           <div>
             <input name="title" placeholder="Search By Title" />
           </div>
