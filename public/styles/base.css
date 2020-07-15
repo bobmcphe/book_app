@@ -1,3 +1,14 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+
+html,
+body {
+  height: 100%;
+}
+
 body {
     background: #9B9B9B;
     max-width: 100%;
@@ -19,15 +30,38 @@ body {
   
 }
 
+h1 {
+  text-align: center;
+}
+
 form {
   width: 100px;
   margin: 0 auto;
-  padding: 100px;
+  padding: 0px;
+}
 
+#searchForm {
+  margin-top: 10%;
+  }
+
+#pinkify{
+color: pink;
+z-index: 99;
+}
+
+  input {
+    padding: 5px;
+    margin: 3px;
+  }
+
+p {
+  padding: 5px;
 }
 
 button {
   margin-bottom: 50px;
+  margin-top: -50px;
+  /* margin-bottom: 70px; */
   }
 
 
@@ -35,12 +69,15 @@ button {
 .lastOne {
   padding-bottom: 5px;
   padding-top: -5px;
+  text-align: center;
+  list-style-type: none;
 }
 
 ul li {
   list-style: none;
   flex-direction: column;
   /* font-weight: 800; */
+  list-style-type: none;
 }
 
 
@@ -48,6 +85,9 @@ ul li {
   font-weight: 500;
   color: #f5f5f5;
   text-shadow: 2px 2px #808080;
+  text-align: center;
+  list-style-type: none;
+  font-size: larger;
 
 }
 
@@ -55,6 +95,9 @@ ul li {
   font-style: italic;
   padding: 5px;
   margin-bottom: 18px;
+  text-align: center;
+  list-style-type: none;
+  font-size: larger;
 }
 
 .descripClass {
@@ -66,6 +109,7 @@ ul li {
   border-radius: 4px;
   margin: 0 auto;
   margin-bottom: 10px;
+  list-style-type: none;
 }
 
 html {
@@ -79,6 +123,15 @@ header, footer {
     margin: 0;
     padding: 0;
     line-height: 55px;
+}
+
+#test-render-section {
+  margin-top: 90px;
+}
+
+
+header {
+  margin-bottom: 50px;
 }
 
 h2 {
@@ -105,8 +158,12 @@ h2 {
 }
 
 footer {
-    position: absolute;
-    bottom: 0;
+    /* position: absolute;
+    bottom: 0; */
+    position:fixed;
+    bottom:0;
+    left:0;
+
     width: 100%;
     color: white;
   }
@@ -125,12 +182,12 @@ footer {
 
 
 .greyBall {
-    width: 50px;
-    height: 50px;
-    margin: 20px;
-    -moz-border-radius: 25px;
-    -webkit-border-radius: 25px;
-    border-radius: 25px;
+    width: 25px;
+    height: 25px;
+    margin: 10px;
+    -moz-border-radius: 12px;
+    -webkit-border-radius: 12px;
+    border-radius: 12px;
     background-color: grey;
     display: inline-block;
 }

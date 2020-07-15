@@ -35,7 +35,7 @@ app.post('/searches', postSearchThing); //line 72
 app.get('/books/:id', singleBookHandler);
 app.post('/addBook', addBook); //line 120
 app.get('/update', showForm);
-app.post('/update', updateBook);
+// app.post('/update', updateBook);
 app.put('/update/books/:id');
 app.use('*', handleNotFound);
 app.use(handleError);
