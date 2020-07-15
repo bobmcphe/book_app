@@ -17,14 +17,17 @@
             <li class="nameClass"><%= book.author  %> </li>
             <li class="descripClass"><%= book.book_description  %> </li>
             <li class="lastOne"><%= book.isbn  %> </li>
+            <div id="editTemplate">
+                <%- include('../../layout/edit') %>
+            </div>
             
-            <form method="get" action="/update">
-
+            <form >
+                <!-- method="get" action="/update" -->
                 <input type="hidden" name="title" value="<%=book.title%>"> 
                 <input type="hidden" name="author" value="<%=book.author%>"> 
                 <input type="hidden" name="book_description" value="<%=book.book_description%>"> 
                 <input type="hidden" name="isbn" value="<%=book.isbn%>"> 
-                <button type="submit">Update Book Details</button>
+                <button id="detailsButton" type="submit">Update Book</button>
             </form>
 
             <% } %>
@@ -32,5 +35,21 @@
             <a href="/">Go Home</a>
         </ul>
     </div>
+
+    <script
+    src="http://code.jquery.com/jquery-3.5.1.min.js"
+    integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="
+    crossorigin="anonymous">
+</script>
+<script>
+    let $button = $('#detailsButton');
+        $button.on('click', hideFunction(event)
+    );
+
+    function hideFunction(e){
+        e.preventDefault();
+        $('#editTemplate').toggle(display);
+    }
+</script>
 </body>
 </html>
