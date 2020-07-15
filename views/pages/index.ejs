@@ -1,36 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bookshelf App</title>
-    <link rel="stylesheet" href="/styles/base.css">
-    <!-- Load an icon library to show a hamburger menu (bars) on small screens -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <%- include('../layout/head') %>
 </head>
 <body>
     <header>
-        <section>
-            <h2>Best Books!</h2>
-            <!-- "Hamburger menu" / "Bar icon" to toggle the navigation links -->
-            <a href="javascript:void(0);" class="icon" onclick="myFunction()">
-                <i class="fa fa-bars"></i>
-            </a>
-            </div>
-        </section>
-
-        <div id="searchResultsBar">Search Results</div>
-
-        <!-- Top Navigation Menu -->
-<div class="topnav">
-
-    <!-- Navigation links (hidden by default) -->
-    <div id="myLinks">
-    <a href="/searches/new">Search</a>
-    <a href="/pages/show">Saved</a>
-    <a href="#about">About</a>
-    </div>
-</div>
+        <%- include('../layout/header') %>
     </header>
 
 <!-----------------MAIN--------------------->
@@ -40,10 +15,20 @@
         <h2>This is the Index Page</h2>
         <img src="" alt="" title="">
         <div id ="test-render-section">
+            <%  for (var book of books) {%>
+                <li><img src="<%= book.thumbnail  %>"> </li> 
+                <li class="capTitle"><%= book.title  %> </li>
+                <li class="nameClass"><%= book.author  %> </li>
+                <li class="descripClass"><%= book.book_description  %> </li>
+                <li class="lastOne">ISBN: <%= book.isbn  %> </li> 
 
-    
+                <form method="GET" action="/books/<%=book.id%>">
+                
+                <button>View Details</button>
+                </form>
+                <% } %>
 
-        </div>
+            </div> 
         <h3></h3>
     </section>
     <section id="target"></section>

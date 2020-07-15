@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include('../layout/head') %>
+</head>
+<body>
+    <header>
+        <%- include('../layout/header') %>
+    </header>
+<body>
+    <h1>Update Book Details</h1>
+    <form method="post" action="/update/books/<%=book.id%>?_method=PUT">
+
+        <input type="text" name="title" value="<%=book.title%>" placeholder="<%=book.title%>"> 
+        <input type="text" name="author" value="<%=book.author%>" placeholder="<%=book.author%>"> 
+        <input type="text" name="book_description" value="<%=book.book_description%>" placeholder="<%=book.book_description%>"> 
+        <input type="text" name="isbn" value="<%=book.isbn%>" placeholder="<%=book.isbn%>"> 
+        <button type="submit">Update Book Details</button>
+    </form>
+
+    <% } %>
+
+    <a href="/">Go Home</a>
+</body>
+</html>
+

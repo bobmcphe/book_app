@@ -29,18 +29,24 @@ app.use(express.static('./public'));
 // Route Definitions
 // ----------------------------------------------
 
-// app.get('/', (req, res) => {
-//     res.status(200).send('This server is working');
-//   });
-app.get('/', helloHandler);
-// app.get('/form-with-get', handleSearch)
+app.get('/', retrieveBooks);
 app.get('/searches/new', registerForm);
-app.post('/searches', postSearchThing);
-// app.get('/books/:id', singleBookHandler);
-app.post('/addBook', addBook);
-
+app.post('/searches', postSearchThing); //line 72
+app.get('/books/:id', singleBookHandler);
+app.post('/addBook', addBook); //line 120
+app.get('/update', showForm);
+app.post('/update', updateBook);
+app.put('/update/books/:id');
 app.use('*', handleNotFound);
 app.use(handleError);
+
+function showForm(req, res) {
+    res.render('pages/edit')
+}
+
+function updateBook(req, res){
+    res.render('pages')
+}
 
 // ----------------------------------------------
 // ROUTE HANDLER FUNCTIONS
@@ -68,7 +74,6 @@ app.use(handleError);
 //             res.status(500).send(error);
 //         });
 // }
-
 function postSearchThing (req, res) {
 let bookObjArr = [];
 let title = req.body.title; //does body go here? It was already body below...but I thought 'get' doesn't use it?
@@ -93,7 +98,6 @@ superagent.get(API)
         res.status(500).send(error);
     });
 }
-
 //result = binaryCondition ? valueReturnedIfTrue : valueReturnedIfFalse;
 //below uses short circuits and ternary operators
 function Book(obj) {
@@ -106,17 +110,14 @@ function Book(obj) {
     //this.isbn = (typeof(obj.volumeInfo.industryIdentifiers) !=='undefined' ? obj.volumeInfo.industryIdentifiers.identifier : 'no isbn');
     this.thumbnail = (obj.volumeInfo.imageLinks) ? obj.volumeInfo.imageLinks.thumbnail : 'https://i.imgur.com/J5LVHEL.jpg';
 }
-
 function registerForm (req,res) {
     res.render('pages/searches/new');
 }
-
 // function handleSearch(req,res){
 //     console.log(req.query);
 //     res.send(`Form with GET ... ${req.query.title}`)
 //     //res.render('pages/searches/new', { formdata: req.query }); added this to save
 // }
-
 function addBook(req, res) {
     console.log(req.body);
     let SQL = 'INSERT INTO bookdb (author, title, book_description, isbn) VALUES ($1, $2, $3, $4) RETURNING *;';
@@ -138,9 +139,6 @@ function addBook(req, res) {
  //https://alligator.io/nodejs/req-object-in-expressjs/
     //USE PARAMS IF YOU ARE ACCESSING DATA FROM THE ROUTE I.E. /Filepath/Books:id
 
-
-
-
 function retrieveBooks(req, res) {
     //create query
     const SQL = 'SELECT * from bookdb';
@@ -148,29 +146,44 @@ function retrieveBooks(req, res) {
     //give our SQL query to our pg 'agent'
     client.query(SQL)
         .then (results => {
-            //do we just need to return this?
-            response.status(200).json(results);
+          res.render('pages/index', {books:results.rows})
+            // res.status(200).json(results);
         })
-        .catch(error => {response.status(500).send(error)});    
+        .catch(error => {res.status(500).send(error)});    
 }
+
+function singleBookHandler(req, res) {
+//pull book from database
+//render detail page
+    console.log(req.params)
+    let SQL = `SELECT * FROM bookdb WHERE id = $1`;
+    let param = [req.params.id];
+
+    client.query(SQL, param)
+        .then (results => {
+            res.render('pages/books/detail', {books:results.rows})
+        })
+        .catch(error => {res.status(500).send(error)});
+}
+
+// function getDetailHandler(req, res){
+//     console.log(req.params)
+//     let SQL = `SELECT * FROM tasks WHERE id = $1`;
+//     let param = [req.params.task_id];
 
 function helloHandler(req, res){
     //RENDER THE INDEX.EJS FILE
     res.render('pages/index');
-
 }
 
 function handleNotFound(req, res) {
     res.status(404).send('Could Not Find What You Asked For');
 }
-  
   // 500 (catastrophic) error handler. Log it, and then tell the user
 function handleError(error, req, res, next) {
 console.error(error);
 res.status(500).send('Something Bad Happened')
 }
-
-
 //   app.listen(process.env.PORT, () => console.log(`Server is running on ${process.env.PORT}`));
 
 client.connect()
