@@ -8,16 +8,18 @@
 </head>
 <body>
     <!--TODO I think we have something wrong with our JS, which is causing it to not create separate cards-->
-    <h1>THIS IS BOOKS/SHOW.EJS</h1>
+    <h1>THIS IS DETAIL.EJS</h1>
     <div class="card">
         <ul>
-            <%  for (var book of savedBooks) {%>
+            <%  for (var book of books) {%>
             <li><img src="<%= book.thumbnail  %>"> </li> 
             <li class="capTitle"><%= book.title  %> </li>
             <li class="nameClass"><%= book.author  %> </li>
             <li class="descripClass"><%= book.book_description  %> </li>
-            <li class="lastOne"><%= book.isbn  %> </li> <!--TODO Our isbn's are not showing up-->
+            <li class="lastOne"><%= book.isbn  %> </li>
             <% } %>
+
+            <a href="/">Go Home</a>
         </ul>
     </div>
 </body>
