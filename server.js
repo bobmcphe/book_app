@@ -34,9 +34,19 @@ app.get('/searches/new', registerForm);
 app.post('/searches', postSearchThing); //line 72
 app.get('/books/:id', singleBookHandler);
 app.post('/addBook', addBook); //line 120
-
+app.get('/update', showForm);
+app.post('/update', updateBook);
+app.put('/update/books/:id');
 app.use('*', handleNotFound);
 app.use(handleError);
+
+function showForm(req, res) {
+    res.render('pages/edit')
+}
+
+function updateBook(req, res){
+    res.render('pages')
+}
 
 // ----------------------------------------------
 // ROUTE HANDLER FUNCTIONS
