@@ -40,10 +40,19 @@
         <h2>This is the Index Page</h2>
         <img src="" alt="" title="">
         <div id ="test-render-section">
+            <%  for (var book of books) {%>
+                <li><img src="<%= book.thumbnail  %>"> </li> 
+                <li class="capTitle"><%= book.title  %> </li>
+                <li class="nameClass"><%= book.author  %> </li>
+                <li class="descripClass"><%= book.book_description  %> </li>
+                <li class="lastOne">ISBN: <%= book.isbn  %> </li> 
 
-    
-
-        </div>
+                <form method="GET" action="/books/<%=book.id%>">
+                <% } %>
+                <button>View Details</button>
+                </form>
+<!-- /books/:id -->
+            </div> 
         <h3></h3>
     </section>
     <section id="target"></section>
