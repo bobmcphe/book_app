@@ -9,7 +9,9 @@ const cors = require('cors');
 const morgan = require('morgan');
 const { response } = require('express');
 
-const client = new pg.Client(process.env.POSTGRES);
+
+
+const client = new pg.Client(process.env.DATABASE_URL);
 
 const app = express();
 
@@ -47,6 +49,8 @@ function showForm(req, res) {
 function updateBook(req, res){
     res.render('pages')
 }
+
+
 
 // ----------------------------------------------
 // ROUTE HANDLER FUNCTIONS
@@ -193,3 +197,7 @@ client.connect()
     .catch(err => {
         throw `PG startuperror: ${err.message}`;
 });
+
+// client.query (sql [array])
+
+// maps the array to the $1

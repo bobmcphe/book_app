@@ -7,3 +7,31 @@ function myFunction() {
       x.style.display = "block";
     }
   }
+
+// ----------------------------------------------
+// JQUERY 
+// ----------------------------------------------
+
+// $(document).ready(function(){
+//   // Hide template on load
+//   console.log('I worked');
+//   $("#helloWorld").hide();
+//   });
+
+// $(function() {
+//   let container = $('#editTemplate');
+//       container.hide();
+// });
+
+// $('#detailsButton').click(function() {
+//   $('#helloWorld').toggle();
+// });
+
+// let $button = $('#detailsButton');
+// $button.on('click', hideFunction(event)
+// );
+
+// function hideFunction(event){
+//   event.preventDefault();
+//   $('#editTemplate').toggle(display);
+//   }

@@ -3,6 +3,10 @@
   padding: 0;
 }
 
+/* #editTemplate{
+  display:none;
+} */
+
 
 html,
 body {
@@ -15,6 +19,10 @@ body {
     margin: 0 auto;
     
 }
+
+/* #helloWorld{
+  display: hidden;
+} */
 
 .card{
   border: solid 1px black;
