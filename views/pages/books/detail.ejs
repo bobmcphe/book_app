@@ -43,12 +43,13 @@
 </script>
 <script>
     let $button = $('#detailsButton');
-        $button.on('click', hideFunction(event)
+        $button.on('click', hideFunction(e)
     );
 
     function hideFunction(e){
         e.preventDefault();
-        $('#editTemplate').toggle(display);
+        console.log('I am working ------------------------');
+        $('#editTemplate').toggle();
     }
 </script>
 </body>

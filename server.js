@@ -11,7 +11,7 @@ const { response } = require('express');
 
 
 
-const client = new pg.Client(process.env.POSTGRES);
+const client = new pg.Client(process.env.DATABASE_URL);
 
 const app = express();
 
@@ -198,3 +198,6 @@ client.connect()
         throw `PG startuperror: ${err.message}`;
 });
 
+// client.query (sql [array])
+
+// maps the array to the $1
